@@ -1,4 +1,5 @@
 import store from '../js/state.js';
+import api from '../js/api.js';
 import Navbar from '../components/navbar.js';
 import Footer from '../components/footer.js';
 import Modal from '../components/modal.js';
@@ -31,23 +32,24 @@ const Order = {
                     <div style="flex: 1; min-width: 300px;">
                         <h3 class="mb-4">Shipping Information</h3>
                         <form id="order-form">
+                            <p class="auth-error" id="order-error" style="display:none;"></p>
                             <div class="mb-4">
                                 <label style="display: block; margin-bottom: 0.5rem;">Full Name</label>
-                                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
+                                <input type="text" id="order-name" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
                             </div>
                             <div class="mb-4">
                                 <label style="display: block; margin-bottom: 0.5rem;">Address</label>
-                                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
+                                <input type="text" id="order-address" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
                             </div>
                             <div class="mb-4">
                                 <label style="display: block; margin-bottom: 0.5rem;">City</label>
-                                <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
+                                <input type="text" id="order-city" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
                             </div>
                              <div class="mb-4">
                                 <label style="display: block; margin-bottom: 0.5rem;">Card Number (Fake)</label>
                                 <input type="text" placeholder="0000 0000 0000 0000" style="width: 100%; padding: 0.8rem; border: 1px solid var(--gray-light); border-radius: var(--radius);" required>
                             </div>
-                             <button type="submit" class="btn btn-primary" style="width: 100%;">Place Order ($${total.toFixed(2)})</button>
+                             <button type="submit" class="btn btn-primary" id="order-btn" style="width: 100%;">Place Order ($${total.toFixed(2)})</button>
                         </form>
                     </div>
                     <div style="flex: 1; min-width: 300px; background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); height: fit-content;">
@@ -73,20 +75,45 @@ const Order = {
         await Navbar.afterRender();
         const form = document.getElementById('order-form');
         if (form) {
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                store.clearCart();
-                
-                Modal.show({
-                    title: 'Order Successfully Placed!',
-                    message: "Your order has been successfully added. We’re preparing it with care ☕",
-                    onClose: () => {
-                        window.location.hash = '/';
-                    }
-                });
+
+                const name = document.getElementById('order-name').value.trim();
+                const address = document.getElementById('order-address').value.trim();
+                const city = document.getElementById('order-city').value.trim();
+                const errorEl = document.getElementById('order-error');
+                const btn = document.getElementById('order-btn');
+
+                errorEl.style.display = 'none';
+
+                const state = store.getState();
+                const items = state.cart.map(({ id, name, price, quantity }) => ({ id, name, price, quantity }));
+
+                btn.disabled = true;
+                btn.textContent = 'Placing order...';
+
+                try {
+                    const { order } = await api.placeOrder(items, { name, address, city });
+
+                    store.clearCart();
+
+                    Modal.show({
+                        title: 'Order Successfully Placed!',
+                        message: `Your order <strong>#${order.orderId.slice(0, 8).toUpperCase()}</strong> has been confirmed. We're preparing it with care ☕`,
+                        onClose: () => {
+                            window.location.hash = '/';
+                        }
+                    });
+                } catch (err) {
+                    btn.disabled = false;
+                    btn.textContent = `Place Order ($${items.reduce((s, i) => s + i.price * i.quantity, 0).toFixed(2)})`;
+                    errorEl.textContent = err.message;
+                    errorEl.style.display = 'block';
+                }
             });
         }
     }
 };
 
 export default Order;
+

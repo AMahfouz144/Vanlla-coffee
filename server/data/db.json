@@ -1,0 +1,149 @@
+{
+  "users": [
+    {
+      "id": "064ac99b-7f49-4d8b-8ae5-1214afc5f0b9",
+      "name": "Abdelrahman Mohmmed Mahfouz Abdelrahman",
+      "email": "abdomohmmedmahfouz@gmail.com",
+      "password": "$2a$10$imz6Jt9JqIMAVWjhcFKfW.yXCtEwnbG6R0p9rFbA0zunDWiJpHYDa",
+      "createdAt": "2026-02-22T02:53:37.043Z"
+    },
+    {
+      "id": "f972bd32-bd6e-4dce-af7f-06a180cb46ab",
+      "name": "Abdelrahman Mohmmed Mahfouz Abdelrahman",
+      "email": "7afizooo@gmail.com",
+      "password": "$2a$10$p1wZKb8ZNeV/fELTXsJ5.e3wuAjVTKvhKhtxtJ2E/9NECOLU9M6Uy",
+      "createdAt": "2026-02-22T04:18:31.453Z"
+    },
+    {
+      "id": "35d9d3a4-8fb1-48b4-9b7f-64ed25695755",
+      "name": "Abdelrahman Mohmmed Mahfouz Abdelrahman",
+      "email": "abdomohmmedmahfouz123@gmail.com",
+      "password": "$2a$10$c7xpHJ5BLRB1HmNDEPwkyO/86N.V42c1eizHm0F0XYIKPMVlD4dPS",
+      "createdAt": "2026-02-22T04:22:05.483Z"
+    }
+  ],
+  "orders": [
+    {
+      "orderId": "cf72940e-be47-475b-9a09-b0e946aca986",
+      "items": [
+        {
+          "id": "5",
+          "name": "Strawberry Cheesecake",
+          "price": 5.5,
+          "quantity": 1
+        }
+      ],
+      "shipping": {
+        "name": "Abdelrahman Mohmmed Mahfouz Abdelrahman",
+        "address": "None",
+        "city": "Mallawi"
+      },
+      "total": 5.5,
+      "status": "confirmed",
+      "createdAt": "2026-02-22T04:16:02.290Z"
+    },
+    {
+      "orderId": "d36ec6db-e953-411a-91c6-3df7fdc87da9",
+      "items": [
+        {
+          "id": "6",
+          "name": "Iced Matcha Latte",
+          "price": 5,
+          "quantity": 3
+        }
+      ],
+      "shipping": {
+        "name": "Abdelrahman Mohmmed Mahfouz Abdelrahman",
+        "address": "None",
+        "city": "Mallawi"
+      },
+      "total": 15,
+      "status": "confirmed",
+      "createdAt": "2026-02-22T04:17:39.661Z"
+    },
+    {
+      "orderId": "9b23e5cb-b90b-4551-8b9f-bd1f3fb33d16",
+      "items": [
+        {
+          "id": "6",
+          "name": "Iced Matcha Latte",
+          "price": 5,
+          "quantity": 4
+        },
+        {
+          "id": "2",
+          "name": "Cappuccino",
+          "price": 4,
+          "quantity": 1
+        }
+      ],
+      "shipping": {
+        "name": "Abdelrahman Mohmmed Mahfouz Abdelrahman",
+        "address": "None",
+        "city": "Mallawi"
+      },
+      "total": 24,
+      "status": "confirmed",
+      "createdAt": "2026-02-22T04:21:07.822Z"
+    }
+  ],
+  "contacts": [],
+  "products": [
+    {
+      "id": "1",
+      "name": "Classic Latte",
+      "price": 4.5,
+      "category": "Coffee",
+      "image": "https://sharpaspirant.com/wp-content/uploads/2021/05/Keto-Coffee-Recipes-11-768x896.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Cappuccino",
+      "price": 4,
+      "category": "Coffee",
+      "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": "3",
+      "name": "Double Espresso",
+      "price": 3.5,
+      "category": "Coffee",
+      "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": "4",
+      "name": "Butter Croissant",
+      "price": 3,
+      "category": "Desserts",
+      "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": "5",
+      "name": "Strawberry Cheesecake",
+      "price": 5.5,
+      "category": "Desserts",
+      "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": "6",
+      "name": "Iced Matcha Latte",
+      "price": 5,
+      "category": "Drinks",
+      "image": "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": "7",
+      "name": "Caramel Macchiato",
+      "price": 4.75,
+      "category": "Coffee",
+      "image": "https://img.freepik.com/premium-photo/photo-caramel-macchiato-classic-coffee-beverage-topped-wiphoto-whip-front-view-clean-bg_655090-969252.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Chocolate Muffin",
+      "price": 3.25,
+      "category": "Desserts",
+      "image": "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    }
+  ]
+}

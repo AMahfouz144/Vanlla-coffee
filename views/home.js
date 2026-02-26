@@ -1,5 +1,6 @@
 import api from '../js/api.js';
 import ProductCard from '../components/productCard.js';
+import ProductSlider from '../components/productSlider.js';
 import Navbar from '../components/navbar.js';
 import Footer from '../components/footer.js';
 import store from '../js/state.js';
@@ -12,13 +13,8 @@ const Home = {
 
         return `
             ${navbar}
-            <div class="hero">
-                <div class="container">
-                    <h1>Sip Excellence</h1>
-                    <p>Start your day with the finest coffee blends.</p>
-                    <a href="#menu" class="btn btn-primary" id="shop-now-btn">Shop Now</a>
-                </div>
-            </div>
+
+            ${ProductSlider.render(products)}
 
             <div class="container mb-8" id="menu">
                 <h2 class="text-center mb-8" style="font-size: 2rem; color: var(--primary-color);">Our Products</h2>
@@ -85,6 +81,7 @@ const Home = {
 
     afterRender: async () => {
         await Navbar.afterRender();
+        ProductSlider.afterRender();
 
         // Shop Now Scroll Logic
         const shopBtn = document.getElementById('shop-now-btn');
@@ -113,10 +110,28 @@ const Home = {
         // Contact Form Logic
         const contactForm = document.getElementById('contact-form');
         if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
+            contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                alert('Message sent! We will get back to you soon.');
-                contactForm.reset();
+
+                const name = document.getElementById('contact-name').value.trim();
+                const email = document.getElementById('contact-email').value.trim();
+                const message = document.getElementById('contact-message').value.trim();
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                try {
+                    await api.sendContact(name, email, message);
+                    contactForm.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                    alert('Message sent successfully! We will get back to you soon.');
+                } catch (err) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                    alert('Failed to send message. Please try again.');
+                }
             });
         }
 
